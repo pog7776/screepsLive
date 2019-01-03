@@ -1,7 +1,11 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
-var roleHealer = require('role.healer');
+//
+var roleHarvester1 = require('role.harvester1');
+var roleUpgrader1 = require('role.upgrader1');
+var roleBuilder1 = require('role.builder1');
+//
 var roleTower = require('role.tower');
 var essentialStaff = require('staff.essential');
 var autoSpawn = require('staff.autoSpawn');
@@ -9,7 +13,7 @@ var autoSpawn = require('staff.autoSpawn');
 module.exports.loop = function () {
 
     //ensure basic staff is present
-    //essentialStaff.run();
+    essentialStaff.run();
 
     //run autoSpawner
     autoSpawn.run();
@@ -34,12 +38,18 @@ module.exports.loop = function () {
             if(creep.memory.role == 'builder') {
                 roleBuilder.run(creep);
             }
-            if(creep.memory.role == 'healer'){
-                roleHealer.run(creep);
+
+            //
+            if(creep.memory.role == 'harvester1') {
+                roleHarvester1.run(creep);
             }
-            if(!creep.memory.role){
-                creep.memory.role == 'unallocated';
+            if(creep.memory.role == 'upgrader1') {
+                roleUpgrader1.run(creep);
             }
+            if(creep.memory.role == 'builder1') {
+                roleBuilder1.run(creep);
+            }
+            //
         }
     
 }

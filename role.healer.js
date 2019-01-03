@@ -14,17 +14,23 @@ var roleHealer = {
                 filter: (structure) => structure.hits < structure.hitsMax
             });
 
-        if(creep.memory.healing && !closestDamagedStructure) {
+        if(creep.memory.healing && !closestDamagedStructure && creep.carry.energy == creep.carryCapacity) {
             creep.memory.healing = false;
             creep.say('Done');//ð
         }
+        else if(!creep.memory.healing && !closestDamagedStructure && creep.carry.energy < creep.carryCapacity){
+            var sources = creep.room.find(FIND_SOURCES);
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
+            }
+        }
+
         if(closestDamagedStructure != null){  //!creep.memory.healing &&
             creep.memory.healing = true;
             
             if(creep.repair(closestDamagedStructure) == -12){ //ERR_NOT_IN_RANGE
                 creep.moveTo(closestDamagedStructure, {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
             }
-
             creep.say('Healing');//â¡
         }
     }
