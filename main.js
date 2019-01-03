@@ -13,7 +13,7 @@ var autoSpawn = require('staff.autoSpawn');
 module.exports.loop = function () {
 
     //ensure basic staff is present
-    essentialStaff.run();
+    //essentialStaff.run();
 
     //run autoSpawner
     autoSpawn.run();

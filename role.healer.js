@@ -35,7 +35,7 @@ var roleHealer = {
             if(creep.repair(closestDamagedStructure) == -12){ //ERR_NOT_IN_RANGE
                 creep.moveTo(closestDamagedStructure, {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
             }
-            creep.say('Healing');//Ã¢ÂÂ¡
+            creep.say('Healing');
         }
     }
 };
