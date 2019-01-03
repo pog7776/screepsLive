@@ -1,11 +1,11 @@
 var storeCreep = require('function.store');
 
-var roleBuilder = {
+var roleBuilder1 = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
 
-    	if(creep.room.controller.id != creep.memory.home){
+        if(creep.room.controller.id != creep.memory.home){
             creep.moveTo(Game.getObjectById(creep.memory.home));
         }
         else if(creep.memory.home == undefined){
@@ -45,11 +45,11 @@ var roleBuilder = {
 	    }
 	    else if(targets.length){
 	        var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
+            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
             }
 	    }
 	}
 };
 
-module.exports = roleBuilder;
+module.exports = roleBuilder1;

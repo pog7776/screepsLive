@@ -5,7 +5,7 @@
 */
 
 //essential staff list
- var staff = ['sHarvester','sUpgrader','sBuilder']
+ var staff = ['sHarvester','sUpgrader','sBuilder'];
  
  var essentialStaff = {
     run: function() { 
