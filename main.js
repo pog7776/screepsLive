@@ -1,11 +1,6 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
-//
-var roleHarvester1 = require('role.harvester1');
-var roleUpgrader1 = require('role.upgrader1');
-var roleBuilder1 = require('role.builder1');
-//
 var roleTower = require('role.tower');
 var essentialStaff = require('staff.essential');
 var autoSpawn = require('staff.autoSpawn');
