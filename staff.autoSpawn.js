@@ -209,7 +209,7 @@ function capitalizeFirstLetter(string) {
         if(mainSpawn.spawning) { 
             var spawningCreep = Game.creeps[mainSpawn.spawning.name];
             mainSpawn.room.visual.text(
-                /*'Ã°ÂÂÂ Ã¯Â¸Â' + */spawningCreep.memory.role,
+                /*'ÃÂ°ÃÂÃÂÃÂ ÃÂ¯ÃÂ¸ÃÂ' + */spawningCreep.memory.role,
                 mainSpawn.pos.x + 1, 
                 mainSpawn.pos.y, 
                     {align: 'left', opacity: 0.8});

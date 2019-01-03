@@ -18,7 +18,7 @@ var storeCreep = {
         
         if(creep.pos != storage){
 	        creep.moveTo(storage, {visualizePathStyle: {stroke: '#ff5555'}}, {maxRooms:1});
-	        creep.say('z');//Ã°ÂÂÂ¤
+	        creep.say('z');//ÃÂ°ÃÂÃÂÃÂ¤
 	    }
     }
 };

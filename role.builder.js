@@ -16,11 +16,11 @@ var roleBuilder = {
 
 	    if(creep.memory.building && creep.carry.energy == 0 && !targets.length) {
             creep.memory.building = false;
-            creep.say('harvest'); //Ã°ÂÂÂ
+            creep.say('harvest'); //ÃÂ°ÃÂÃÂÃÂ
 	    }
 	    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity && targets.length) {
 	        creep.memory.building = true;
-	        creep.say('build'); //Ã°ÂÂÂ§
+	        creep.say('build'); //ÃÂ°ÃÂÃÂÃÂ§
 	    }
 	    else{
 	    	creep.memory.building = false;
@@ -45,8 +45,8 @@ var roleBuilder = {
 	    }
 	    else if(targets.length){
 	        var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
+            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
             }
 	    }
 	}
