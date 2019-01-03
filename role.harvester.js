@@ -7,11 +7,11 @@ var roleHarvester = {
 
         if(creep.room.controller.id != creep.memory.home){
             creep.moveTo(Game.getObjectById(creep.memory.home));
-            console.log(creep.name + ' current ' + creep.room.controller.id +' home ' + creep.memory.home);
+            //console.log(creep.name + ' current ' + creep.room.controller.id +' home ' + creep.memory.home);
         }
         else if(creep.memory.home == undefined){
             creep.memory.home = '5bbcafbe9099fc012e63b192';
-            console.log(creep.name + ' current ' + creep.room.controller.id +' home ' + creep.memory.home);
+            //console.log(creep.name + ' current ' + creep.room.controller.id +' home ' + creep.memory.home);
         }
 
         if(creep.carry.energy < creep.carryCapacity) {

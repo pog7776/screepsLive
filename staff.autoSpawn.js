@@ -17,22 +17,29 @@ var autoSpawn = {
         }
     }
 
-//unit types
-var unitTypesString = ['harvesters','harvestersLong', 'upgraders', 'upgradersLong', 'builders', 'buildersLong'];
-
 //main spawner
 var mainSpawn = Game.spawns['Spawn1'];
 
+//unit types
+var harvesters;
+var upgraders;
+var builders;
+
+var unitTypesString = ['harvesters', 'upgraders', 'builders']; //,'harvestersLong', 'upgradersLong', 'buildersLong'
+var unitTypes = [harvesters, upgraders, builders];
+
 //control number of units--------------------------------------------------------------------------
 
-var numHarvesters = 0;//3;
+var numHarvesters = 3;//3;
 var numHarvesters1 = 3;
 
-var numUpgraders = 2;//5;
+var numUpgraders = 5;//5;
 var numUpgraders1 = 5;
 
-var numBuilders = 1;//3;
+var numBuilders = 3;//3;
 var numBuilders1 = 3;
+
+var unitAmount = [numHarvesters, numUpgraders, numBuilders];
 
 //Control level of creeps------------------------------------------------------------------------
 
@@ -63,6 +70,7 @@ var level3 = [WORK,WORK,CARRY,CARRY,MOVE,MOVE];
 
 //Healer creeps----------------------------------------------------------------------------------
 //healer creep presets
+var healLvl1 = [MOVE, HEAL];
 
 //Combat creeps----------------------------------------------------------------------------------
 //close range creep presets
@@ -71,103 +79,126 @@ var level3 = [WORK,WORK,CARRY,CARRY,MOVE,MOVE];
 
 
 //Spawn creeps-----------------------------------------------------------------------------------
+
+function removeLastLeter(string) {
+    return string.slice(0, -1)
+}
 //builders---------------------------------------------------------------------------------------
-        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
-        //console.log('Builders: ' + builders.length);
+        for (var i = unitTypes.length - 1; i >= 0; i--) {
 
-        if(builders.length < numBuilders && !mainSpawn.spawning) {
-            var newName = 'Builder' + Game.time;
-            console.log('Attempting to spawn new builder: ' + newName);
-            if(mainSpawn.spawnCreep(currentLevel, newName, 
-                {memory: {role: 'builder'}}) == -6){    //, home: rooms.controller.id
-                console.log('Not Enough Energy');
-            }
-            else{
-                console.log(newName + ' spawning');
+             unitTypes[i] = _.filter(Game.creeps, (creep) => creep.memory.role == removeLastLeter(unitTypesString[i]));
+            //console.log('Builders: ' + builders.length);
+
+            if(unitTypes[i].length < unitAmount[i] && !mainSpawn.spawning) {
+                var newName = capitalizeFirstLetter(removeLastLeter(unitTypesString[i])) + Game.time;
+                console.log('Attempting to spawn new ' + removeLastLeter(unitTypesString[i]) + ' ' + newName);
+                if(mainSpawn.spawnCreep(currentLevel, newName, 
+                    {memory: {role: removeLastLeter(unitTypesString[i])}}) == -6){    //, home: rooms.controller.id
+                    console.log('Not Enough Energy');
+                }
+                else{
+                    console.log(newName + ' spawning');
+                }
             }
         }
 
-    //long range
-        var buildersLong = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder1');
 
-        if(buildersLong.length < numBuilders1 && !mainSpawn.spawning) {
-            var newName = 'Builder-Long' + Game.time;
-            console.log('Attempting to spawn new builder-long: ' + newName);
-            if(mainSpawn.spawnCreep(currentLevel, newName, 
-                {memory: {role: 'builder1'}}) == -6){
-                console.log('Not Enough Energy');
-            }
-            else{
-                console.log(newName + ' spawning');
-            }        
-        }
+//         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+//         //console.log('Builders: ' + builders.length);
 
-//upgraders---------------------------------------------------------------------------------------
-        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-        //console.log('Upgraders: ' + upgraders.length);
+//         if(builders.length < numBuilders && !mainSpawn.spawning) {
+//             var newName = 'Builder' + Game.time;
+//             console.log('Attempting to spawn new builder: ' + newName);
+//             if(mainSpawn.spawnCreep(currentLevel, newName, 
+//                 {memory: {role: 'builder'}}) == -6){    //, home: rooms.controller.id
+//                 console.log('Not Enough Energy');
+//             }
+//             else{
+//                 console.log(newName + ' spawning');
+//             }
+//         }
 
-        if(upgraders.length < numUpgraders && !mainSpawn.spawning) {
-            var newName = 'Upgrader' + Game.time;
-            console.log('Attempting to spawn new upgrader: ' + newName);
-            if(mainSpawn.spawnCreep(currentLevel, newName, 
-                {memory: {role: 'upgrader'}}) == -6){
-                console.log('Not Enough Energy');
-            }
-            else{
-                console.log(newName + ' spawning');
-            }       
-        }
+//     //long range
+//         var buildersLong = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder1');
 
-    //long range
-        var upgradersLong = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader1');
+//         if(buildersLong.length < numBuilders1 && !mainSpawn.spawning) {
+//             var newName = 'Builder-Long' + Game.time;
+//             console.log('Attempting to spawn new builder-long: ' + newName);
+//             if(mainSpawn.spawnCreep(currentLevel, newName, 
+//                 {memory: {role: 'builder1'}}) == -6){
+//                 console.log('Not Enough Energy');
+//             }
+//             else{
+//                 console.log(newName + ' spawning');
+//             }        
+//         }
 
-        if(upgradersLong.length < numUpgraders1 && !mainSpawn.spawning) {
-            var newName = 'Upgrader-Long' + Game.time;
-            console.log('Attempting to spawn new upgrader-long: ' + newName);
-            if(mainSpawn.spawnCreep(currentLevel, newName, 
-                {memory: {role: 'upgrader1'}}) == -6){
-                console.log('Not Enough Energy');
-            }
-            else{
-                console.log(newName + ' spawning');
-            }        
-        }
+// //upgraders---------------------------------------------------------------------------------------
+//         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+//         //console.log('Upgraders: ' + upgraders.length);
 
-//harvesters---------------------------------------------------------------------------------------
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-        //console.log('Harvesters: ' + harvesters.length);
+//         if(upgraders.length < numUpgraders && !mainSpawn.spawning) {
+//             var newName = 'Upgrader' + Game.time;
+//             console.log('Attempting to spawn new upgrader: ' + newName);
+//             if(mainSpawn.spawnCreep(currentLevel, newName, 
+//                 {memory: {role: 'upgrader'}}) == -6){
+//                 console.log('Not Enough Energy');
+//             }
+//             else{
+//                 console.log(newName + ' spawning');
+//             }       
+//         }
 
-        if(harvesters.length < numHarvesters && !mainSpawn.spawning) {
-            var newName = 'Harvester' + Game.time;
-            console.log('Attempting to spawn new harvester: ' + newName);
-            if(mainSpawn.spawnCreep(currentLevel, newName, 
-                {memory: {role: 'harvester'}}) == -6){
-                console.log('Not Enough Energy');
-            }
-            else{
-                console.log(newName + ' spawning');
-            }        
-        }
-    //long range
-        var harvestersLong = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester1');
-        //console.log('Harvesters: ' + harvesters.length);
+//     //long range
+//         var upgradersLong = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader1');
 
-        if(harvestersLong.length < numHarvesters1 && !mainSpawn.spawning) {
-            var newName = 'Harvester-Long' + Game.time;
-            console.log('Attempting to spawn new harvester-long: ' + newName);
-            if(mainSpawn.spawnCreep(currentLevel, newName, 
-                {memory: {role: 'harvester1'}}) == -6){
-                console.log('Not Enough Energy');
-            }
-            else{
-                console.log(newName + ' spawning');
-            }        
-        }
+//         if(upgradersLong.length < numUpgraders1 && !mainSpawn.spawning) {
+//             var newName = 'Upgrader-Long' + Game.time;
+//             console.log('Attempting to spawn new upgrader-long: ' + newName);
+//             if(mainSpawn.spawnCreep(currentLevel, newName, 
+//                 {memory: {role: 'upgrader1'}}) == -6){
+//                 console.log('Not Enough Energy');
+//             }
+//             else{
+//                 console.log(newName + ' spawning');
+//             }        
+//         }
+
+// //harvesters---------------------------------------------------------------------------------------
+//         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+//         //console.log('Harvesters: ' + harvesters.length);
+
+//         if(harvesters.length < numHarvesters && !mainSpawn.spawning) {
+//             var newName = 'Harvester' + Game.time;
+//             console.log('Attempting to spawn new harvester: ' + newName);
+//             if(mainSpawn.spawnCreep(currentLevel, newName, 
+//                 {memory: {role: 'harvester'}}) == -6){
+//                 console.log('Not Enough Energy');
+//             }
+//             else{
+//                 console.log(newName + ' spawning');
+//             }        
+//         }
+//     //long range
+//         var harvestersLong = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester1');
+//         //console.log('Harvesters: ' + harvesters.length);
+
+//         if(harvestersLong.length < numHarvesters1 && !mainSpawn.spawning) {
+//             var newName = 'Harvester-Long' + Game.time;
+//             console.log('Attempting to spawn new harvester-long: ' + newName);
+//             if(mainSpawn.spawnCreep(currentLevel, newName, 
+//                 {memory: {role: 'harvester1'}}) == -6){
+//                 console.log('Not Enough Energy');
+//             }
+//             else{
+//                 console.log(newName + ' spawning');
+//             }        
+//         }
 
 //Displays---------------------------------------------------------------
 
 //unit types
-var unitTypes = [harvesters, harvestersLong, upgraders, upgradersLong, builders, buildersLong];
+//var unitTypes = [harvesters, harvestersLong, upgraders, upgradersLong, builders, buildersLong];
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
