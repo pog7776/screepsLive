@@ -43,9 +43,13 @@ module.exports.loop = function () {
             if(creep.memory.role == 'reloader'){
                 roleReloader.run(creep);
             }
-
-            //instruct structures
-            roleTowerStructure.run();
         }
+
+        //instruct structures
+
+        var currentRoom = Game.spawns['Spawn1'].room;
+        console.log(currentRoom);
+
+        roleTowerStructure.run(currentRoom);
     
 }

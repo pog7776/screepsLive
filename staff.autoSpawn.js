@@ -42,7 +42,7 @@ var numReloaders = 1;
 
 var numHealers = 0;
 
-var unitAmount = [numHarvesters, numUpgraders, numBuilders, numReloaders];
+var unitAmount = [numHarvesters, numUpgraders, numBuilders, numReloaders, numHealers];
 
 //Control level of creeps------------------------------------------------------------------------
 
@@ -79,15 +79,19 @@ var lvl7 = lvl6.concat(WORK);
         var energyCapacity = Game.spawns['Spawn1'].room.energyCapacityAvailable;
         var level = Math.round((energyCapacity / 100) - 3);
 
-        currentLevel = levels[level];
+        var currentLevel = levels[level];
 
         if(level > levels.length-1){
             level = levels.length-1
         }
+
+        if(level < 0){
+            level == 0;
+        }
     }
 
     // ---!!! override current worker level !!!---
-        //var currentLevel = lvl3;
+        //currentLevel = lvl3;
     // ---!! ------------------------------ !!!---
 
         //console.log(level);
@@ -109,7 +113,7 @@ var healLvl1 = [MOVE, HEAL, WORK, CARRY];
 function removeLastLeter(string) {
     return string.slice(0, -1)
 }
-//builders---------------------------------------------------------------------------------------
+//SpawnCreeps---------------------------------------------------------------------------------------
         for (var i = unitTypes.length - 1; i >= 0; i--) {
 
             if(unitTypesString[i] == 'healer'){

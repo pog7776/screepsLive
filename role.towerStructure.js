@@ -1,11 +1,10 @@
 var roleTower = {
 
     /** @param {Creep} creep **/
-    run: function() {
+    run: function(myRoomName) {
 
-        var currentRoom = Game.spawns['Spawn1'].room;
-        var hostiles = Game.rooms[currentRoom].find(FIND_HOSTILE_CREEPS); 
-        var towers = Game.rooms[currentRoom].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}}); 
+        var hostiles = Game.rooms[myRoomName].find(FIND_HOSTILE_CREEPS); 
+        var towers = Game.rooms[myRoomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}}); 
         //if there are hostiles - attakc them 
         if(hostiles.length > 0) { 
             var username = hostiles[0].owner.username; 
