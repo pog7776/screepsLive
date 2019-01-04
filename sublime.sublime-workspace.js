@@ -89,7 +89,7 @@
 			],
 			[
 				"carr",
-				"carryCapacityãvariableã"
+				"carryCapacityÃ£ÂÂvariableÃ£ÂÂ"
 			],
 			[
 				"s",
@@ -113,7 +113,7 @@
 			],
 			[
 				"staff",
-				"staffãvariableã"
+				"staffÃ£ÂÂvariableÃ£ÂÂ"
 			],
 			[
 				"spee",

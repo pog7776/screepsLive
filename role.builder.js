@@ -14,7 +14,7 @@ var roleBuilder = {
 
     	var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
 
-	    if(creep.memory.building && creep.carry.energy == 0 && !targets.length) {
+	    if(creep.memory.building && creep.carry.energy == 0 || !targets.length) {
             creep.memory.building = false;
             creep.say('harvest');
 	    }
