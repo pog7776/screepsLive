@@ -31,13 +31,10 @@ var unitTypes = [harvesters, upgraders, builders];
 //control number of units--------------------------------------------------------------------------
 
 var numHarvesters = 3;//3;
-var numHarvesters1 = 3;
 
 var numUpgraders = 5;//5;
-var numUpgraders1 = 5;
 
 var numBuilders = 3;//3;
-var numBuilders1 = 3;
 
 var unitAmount = [numHarvesters, numUpgraders, numBuilders];
 
