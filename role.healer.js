@@ -10,20 +10,23 @@ var roleHealer = {
             creep.memory.home = '5bbcafbe9099fc012e63b192';
         }
 
+        //find damages structure
         var closestDamagedStructure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => structure.hits < structure.hitsMax
             });
 
+        //idle
         if(creep.memory.healing && !closestDamagedStructure && creep.carry.energy == creep.carryCapacity) {
             creep.memory.healing = false;
             creep.say('Done');
         }
-        else if(!creep.memory.healing && creep.carry.energy < creep.carryCapacity){
+        
+
+        if(!creep.memory.healing && creep.carry.energy < creep.carryCapacity){
             creep.memory.harvesting = true;
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
-            }
+            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
         }
         else{
             creep.memory.harvesting = false;
@@ -32,7 +35,7 @@ var roleHealer = {
         if(closestDamagedStructure != null && !creep.memory.harvesting){  //!creep.memory.healing &&
             creep.memory.healing = true;
             
-            if(creep.repair(closestDamagedStructure) == -12){ //ERR_NOT_IN_RANGE
+            if(creep.repair(closestDamagedStructure) == -6){ //ERR_NOT_IN_RANGE
                 creep.moveTo(closestDamagedStructure, {visualizePathStyle: {stroke: '#ffaa00'}}, {maxRooms:1});
             }
             creep.say('Healing');

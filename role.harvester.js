@@ -1,4 +1,5 @@
 var storeCreep = require('function.store');
+var roleUpgrader = require('role.upgrader');
 
 var roleHarvester = {
 
@@ -13,6 +14,8 @@ var roleHarvester = {
             creep.memory.home = '5bbcafbe9099fc012e63b192';
             //console.log(creep.name + ' current ' + creep.room.controller.id +' home ' + creep.memory.home);
         }
+
+
 
         if(creep.carry.energy < creep.carryCapacity) {
             var sources = creep.room.find(FIND_SOURCES);
@@ -36,7 +39,8 @@ var roleHarvester = {
                 creep.memory.store = false;
             }   //Put creep in storage
             else if(!targets.length){
-                storeCreep.run(creep);
+                //storeCreep.run(creep);
+                roleUpgrader.run(creep);
             }
         }
     }
