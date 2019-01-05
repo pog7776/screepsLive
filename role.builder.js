@@ -37,6 +37,11 @@ var roleBuilder = {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}}, {maxRooms:1});
                 }
             }
+            if(!targets){
+                //var closestDamagedStructure = towers.pos.findClosestByRange(FIND_STRUCTURES, 
+                 //   {filter: (s) => s.hits < s.hitsMax && s.structureType == STRUCTURE_WALL || s.structureType == STRUCTURE_RAMPART});
+
+            }
 	    }
 	    else if(targets.length){
 	        var sources = creep.room.find(FIND_SOURCES);
