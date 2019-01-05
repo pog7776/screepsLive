@@ -55,7 +55,7 @@ module.exports.loop = function () {
     //instruct structures
 
     var currentRoom = Game.spawns['Spawn1'].room.name;
-    console.log(currentRoom);
+    //console.log(currentRoom);
         
 
     var towers = Game.rooms[currentRoom].find(FIND_STRUCTURES, {
@@ -70,7 +70,16 @@ module.exports.loop = function () {
         //console.log(tower + ' | ' + target);
 
         if (target != null) {
-            tower.attack(target);
+            switch(tower.attack(target)){
+                case '-6':
+                    console.log('Tower: ' + tower + "doesn't have enough energy!")
+                break;
+
+                case '-14':
+                    console.log("Your level isn't high enough to use this tower" + tower)
+                break;
+
+            }
         }
     }
     //roleTowerStructure.run(currentRoom);
