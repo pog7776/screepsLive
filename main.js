@@ -56,22 +56,21 @@ module.exports.loop = function () {
 
     var currentRoom = Game.spawns['Spawn1'].room.name;
     console.log(currentRoom);
-
-    var enemies= Game.rooms[currentRoom].find(Game.HOSTILE_CREEPS);
-    
+        
 
     var towers = Game.rooms[currentRoom].find(FIND_STRUCTURES, {
     filter: (s) => s.structureType == STRUCTURE_TOWER
     });
 
     for (let tower of towers) {
-        var enemies = tower.room.find(FIND_HOSTILE_CREEPS);
+        var target = tower.room.find(FIND_HOSTILE_CREEPS);
 
-        console.log(tower + ' | ' + enemies);
+    var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
-        var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if (enemies) {
-            tower.attack(enemies[0]);
+        //console.log(tower + ' | ' + target);
+
+        if (target != null) {
+            tower.attack(target);
         }
     }
     //roleTowerStructure.run(currentRoom);
