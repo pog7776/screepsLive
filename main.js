@@ -6,7 +6,6 @@ var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleReloader = require('role.reloader');
 var roleTower = require('role.tower');
-var roleTowerStructure = require('role.towerStructure');
 var home = require('function.home');
 
 var essentialStaff = require('staff.essential');
@@ -53,7 +52,7 @@ module.exports.loop = function () {
     }
 
     //instruct structures
-    roleTowerStructure.run();
+    roleTower.run();
     var currentRoom = Game.spawns['Spawn1'].room.name;
     //console.log(currentRoom);
         
