@@ -1,22 +1,40 @@
 // @flow
 
-var roleTower = {
+var roleTowerStructure = {
 
     /** @param {Creep} creep **/
-    run: function(myRoomName) {
+    run: function() {
 
-        var hostiles = Game.rooms[myRoomName].find(FIND_HOSTILE_CREEPS); 
-        var towers = Game.rooms[myRoomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}}); 
-        //if there are hostiles - attakc them 
-        if(hostiles.length > 0) { 
-            var username = hostiles[0].owner.username; 
-            Game.notify(`User ${username} spotted in room ${myRoomName}`); 
-            towers.forEach(tower => tower.attack(hostiles[0])); 
-            console.log("ALERT!!!! WE ARE UNDER ATTACK!!!!! ALERT!!!! WE ARE UNDER ATTACK!!!!! ALERT!!!! WE ARE UNDER ATTACK!!!!! ALERT!!!! WE ARE UNDER ATTACK!!!!! ");
+        var currentRoom = Game.spawns['Spawn1'].room.name;
+
+
+        var towers = Game.rooms[currentRoom].find(FIND_STRUCTURES, {
+        filter: (s) => s.structureType == STRUCTURE_TOWER
+        });
+
+        for (let tower of towers) {
+            var target = tower.room.find(FIND_HOSTILE_CREEPS);
+
+        var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+
+        console.log(tower + ' | ' + target);
+
+        if (target != null) {
+            switch(tower.attack(target)){
+                case '-6':
+                    console.log('Tower: ' + tower + "doesn't have enough energy!")
+                break;
+
+                case '-14':
+                    console.log("Your level isn't high enough to use this tower" + tower)
+                break;
+
+                }
+            }
         }
 
         //if there are no hostiles.... 
-        if(hostiles.length === 0) { 
+        if(target = null) { 
             //....first heal any damaged creeps 
             for (let name in Game.creeps) { 
                 // get the creep object 
@@ -47,4 +65,4 @@ var roleTower = {
     }
 };
 
-module.exports = roleTower;
+module.exports = roleTowerStructure;
