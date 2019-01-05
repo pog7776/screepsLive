@@ -1,0 +1,20 @@
+[ignore]
+<PROJECT_ROOT>/.je-project-settings/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+# all=off by default
+all=warn
+untyped-type-import=error
+sketchy-null-bool=off
+
+[options]
+
+# all=off by default
+all=true
+
+[strict]

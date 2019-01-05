@@ -1,3 +1,4 @@
+// @flow
 /*
  * Module code goes here. Use 'module.exports' to export things:
  * module.exports.thing = 'a thing';
@@ -32,13 +33,13 @@ var unitTypes = [harvesters, upgraders, builders, reloaders, healers];
 
 //control number of units--------------------------------------------------------------------------
 
-var numHarvesters = 6;//3;
+var numHarvesters = 8;
 
-var numUpgraders = 5;//5;
+var numUpgraders = 6;
 
-var numBuilders = 3;//3;
+var numBuilders = 4;
 
-var numReloaders = 1;
+var numReloaders = 0;
 
 var numHealers = 0;
 
@@ -77,7 +78,7 @@ var lvl7 = lvl6.concat(WORK);
     // 
     for(var name in Game.rooms) {
         var energyCapacity = Game.spawns['Spawn1'].room.energyCapacityAvailable;
-        var level = Math.round((energyCapacity / 100) - 3);
+        var level = Math.round((energyCapacity / 100) - 2);
 
         var currentLevel = levels[level];
 
@@ -91,7 +92,7 @@ var lvl7 = lvl6.concat(WORK);
     }
 
     // ---!!! override current worker level !!!---
-        //currentLevel = lvl3;
+        currentLevel = lvl3;
     // ---!! ------------------------------ !!!---
 
         //console.log(level);
@@ -113,7 +114,7 @@ var healLvl1 = [MOVE, HEAL, WORK, CARRY];
 function removeLastLeter(string) {
     return string.slice(0, -1)
 }
-//SpawnCreeps---------------------------------------------------------------------------------------
+//SpawnCreeps-------------------------------------------------------------------------------------
         for (var i = unitTypes.length - 1; i >= 0; i--) {
 
             if(unitTypesString[i] == 'healer'){
@@ -122,6 +123,10 @@ function removeLastLeter(string) {
 
              unitTypes[i] = _.filter(Game.creeps, (creep) => creep.memory.role == removeLastLeter(unitTypesString[i]));
             //console.log('Builders: ' + builders.length);
+
+            if(unitTypes[i].length == 0 && unitTypesString[i] != 'reloaders' && unitTypesString[i] != 'healers' ){
+                Game.notify('Run out of ' + unitTypesString[i] + '. Maybe something has gone wrong? :/');
+            }
 
             if(unitTypes[i].length < unitAmount[i] && !mainSpawn.spawning) {
                 var newName = capitalizeFirstLetter(removeLastLeter(unitTypesString[i])) + Game.time;

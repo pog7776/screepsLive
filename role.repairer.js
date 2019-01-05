@@ -1,3 +1,5 @@
+// @flow
+
 var roleRepairer =
 {
 /** @param {Creep} creep **/

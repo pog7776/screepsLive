@@ -1,3 +1,5 @@
+// @flow
+
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
@@ -5,6 +7,7 @@ var roleRepairer = require('role.repairer');
 var roleReloader = require('role.reloader');
 var roleTower = require('role.tower');
 var roleTowerStructure = require('role.tower');
+var home = require('function.home');
 
 var essentialStaff = require('staff.essential');
 var autoSpawn = require('staff.autoSpawn');
@@ -28,19 +31,23 @@ module.exports.loop = function () {
         //instruct creeps
         for(var name in Game.creeps) {
             var creep = Game.creeps[name];
-            if(creep.memory.role == 'harvester') {
+
+            home.run(creep);
+            //creep.memory.isHome = true;
+
+            if(creep.memory.role == 'harvester' && creep.memory.isHome == true) {
                 roleHarvester.run(creep);
             }
-            if(creep.memory.role == 'upgrader') {
+            if(creep.memory.role == 'upgrader' && creep.memory.isHome == true) {
                 roleUpgrader.run(creep);
             }
-            if(creep.memory.role == 'builder') {
+            if(creep.memory.role == 'builder' && creep.memory.isHome == true) {
                 roleBuilder.run(creep);
             }
-            if(creep.memory.role == 'healer' || creep.memory.role == 'repairer'){
+            if(creep.memory.role == 'healer' || creep.memory.role == 'repairer' && creep.memory.isHome == true){
                 roleRepairer.run(creep);
             }
-            if(creep.memory.role == 'reloader'){
+            if(creep.memory.role == 'reloader' && creep.memory.isHome == true){
                 roleReloader.run(creep);
             }
         }
@@ -48,7 +55,7 @@ module.exports.loop = function () {
         //instruct structures
 
         var currentRoom = Game.spawns['Spawn1'].room;
-        console.log(currentRoom);
+        //console.log(currentRoom);
 
         roleTowerStructure.run(currentRoom);
     

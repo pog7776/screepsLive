@@ -1,3 +1,5 @@
+// @flow
+
 var storeCreep = {
 
     /** @param {Creep} creep **/

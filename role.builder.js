@@ -1,16 +1,11 @@
+// @flow
+
 var storeCreep = require('function.store');
 
 var roleBuilder = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-
-    	if(creep.room.controller.id != creep.memory.home){
-            creep.moveTo(Game.getObjectById(creep.memory.home));
-        }
-        else if(creep.memory.home == undefined){
-            creep.memory.home = '5bbcafbe9099fc012e63b192';//creep.room;
-        }
 
     	var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
 

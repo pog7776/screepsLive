@@ -1,3 +1,5 @@
+// @flow
+
 var roleTower = {
 
     /** @param {Creep} creep **/
