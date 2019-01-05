@@ -54,11 +54,11 @@ module.exports.loop = function () {
 
     //instruct structures
 
-    var currentRoom = Game.spawns['Spawn1'].room;
-    //console.log(currentRoom);
+    var currentRoom = Game.spawns['Spawn1'].room.name;
+    console.log(currentRoom);
 
 
-    var towers = Game.rooms.currentRoom.find(FIND_STRUCTURES, {
+    var towers = Game.rooms[currentRoom].find(FIND_STRUCTURES, {
     filter: (s) => s.structureType == STRUCTURE_TOWER
     });
 

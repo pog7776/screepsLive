@@ -92,7 +92,7 @@ var lvl7 = lvl6.concat(WORK);
     }
 
     // ---!!! override current worker level !!!---
-        currentLevel = lvl3;
+        //currentLevel = lvl3;
     // ---!! ------------------------------ !!!---
 
         //console.log(level);
