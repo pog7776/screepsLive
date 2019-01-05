@@ -28,35 +28,45 @@ module.exports.loop = function () {
         //console.log('Room "'+name+'" has '+Game.rooms[name].energyAvailable+' energy');
         //Game.creeps['sHarvester'].say(Game.rooms[name].energyAvailable);
     }
-        //instruct creeps
-        for(var name in Game.creeps) {
-            var creep = Game.creeps[name];
+    //instruct creeps
+    for(var name in Game.creeps) {
+        var creep = Game.creeps[name];
 
-            home.run(creep);
-            //creep.memory.isHome = true;
+        home.run(creep);
+        //creep.memory.isHome = true;
 
-            if(creep.memory.role == 'harvester' && creep.memory.isHome == true) {
-                roleHarvester.run(creep);
-            }
-            if(creep.memory.role == 'upgrader' && creep.memory.isHome == true) {
-                roleUpgrader.run(creep);
-            }
-            if(creep.memory.role == 'builder' && creep.memory.isHome == true) {
-                roleBuilder.run(creep);
-            }
-            if(creep.memory.role == 'healer' || creep.memory.role == 'repairer' && creep.memory.isHome == true){
-                roleRepairer.run(creep);
-            }
-            if(creep.memory.role == 'reloader' && creep.memory.isHome == true){
-                roleReloader.run(creep);
-            }
+        if(creep.memory.role == 'harvester' && creep.memory.isHome == true) {
+            roleHarvester.run(creep);
         }
+        if(creep.memory.role == 'upgrader' && creep.memory.isHome == true) {
+            roleUpgrader.run(creep);
+        }
+        if(creep.memory.role == 'builder' && creep.memory.isHome == true) {
+            roleBuilder.run(creep);
+        }
+        if(creep.memory.role == 'healer' || creep.memory.role == 'repairer' && creep.memory.isHome == true){
+            roleRepairer.run(creep);
+        }
+        if(creep.memory.role == 'reloader' && creep.memory.isHome == true){
+            roleReloader.run(creep);
+        }
+    }
 
-        //instruct structures
+    //instruct structures
 
-        var currentRoom = Game.spawns['Spawn1'].room;
-        //console.log(currentRoom);
+    var currentRoom = Game.spawns['Spawn1'].room;
+    //console.log(currentRoom);
 
-        roleTowerStructure.run(currentRoom);
-    
+
+    var towers = Game.rooms.currentRoom.find(FIND_STRUCTURES, {
+    filter: (s) => s.structureType == STRUCTURE_TOWER
+    });
+
+    for (let tower of towers) {
+        var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if (target != undefined) {
+            tower.attack(target);
+        }
+    }
+    //roleTowerStructure.run(currentRoom);
 }
